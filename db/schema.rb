@@ -10,7 +10,22 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_04_22_194546) do
+ActiveRecord::Schema.define(version: 2020_04_24_135349) do
+
+  create_table "accessories", force: :cascade do |t|
+    t.string "name"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+  end
+
+  create_table "accessories_cars", force: :cascade do |t|
+    t.integer "car_id", null: false
+    t.integer "accessory_id", null: false
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["accessory_id"], name: "index_accessories_cars_on_accessory_id"
+    t.index ["car_id"], name: "index_accessories_cars_on_car_id"
+  end
 
   create_table "brands", force: :cascade do |t|
     t.string "name"
@@ -27,6 +42,29 @@ ActiveRecord::Schema.define(version: 2020_04_22_194546) do
     t.datetime "updated_at", precision: 6, null: false
     t.integer "doors"
     t.string "color"
+    t.integer "brand_id"
+    t.integer "classification_id"
+    t.integer "structure_id"
+    t.index ["brand_id"], name: "index_cars_on_brand_id"
+    t.index ["classification_id"], name: "index_cars_on_classification_id"
+    t.index ["structure_id"], name: "index_cars_on_structure_id"
   end
 
+  create_table "classifications", force: :cascade do |t|
+    t.string "name"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+  end
+
+  create_table "structures", force: :cascade do |t|
+    t.string "name"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+  end
+
+  add_foreign_key "accessories_cars", "accessories"
+  add_foreign_key "accessories_cars", "cars"
+  add_foreign_key "cars", "brands"
+  add_foreign_key "cars", "classifications"
+  add_foreign_key "cars", "structures"
 end
