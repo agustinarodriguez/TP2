@@ -20,9 +20,14 @@
   <%= @car.year %>
 </p>
 
-<% unless @car.classification.nil? %>
+<%unless @car.classification.nil? %>
 	<strong>Clasificación:</strong>
 	<p><% = @car.classification.name%></p>
+
+<%unless @car.structure.nil? %>
+	<strong>Estructura:</strong>
+	<p><% = @car.structure.name%></p>
+
 
 <%= link_to 'Edit', edit_car_path(@car) %> |
 <%= link_to 'Back', cars_path %>

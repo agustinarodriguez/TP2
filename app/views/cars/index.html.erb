@@ -2,6 +2,18 @@
 
 <h1>Cars</h1>
 
+<% Brand.all.each do |b| %>
+  <%= link_to b.name, cars_path(:brand_id => b.id)%> |
+  <% end -%>
+
+<% Classification.all.each do |c| %>
+  <%= link_to c.name, cars_path(:classification => c.id)%> |
+  <% end -%>
+
+<% Structure.all.each do |s| %>
+  <%= link_to s.name, cars_path(:structure => s.id)%> |
+  <% end -%>
+
 <table>
   <thead>
     <tr>

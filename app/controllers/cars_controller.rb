@@ -5,6 +5,10 @@ class CarsController < ApplicationController
   # GET /cars.json
   def index
     @cars = Car.all
+    @cars =@cars.where(:color => params[:color]) unless params[:color].blank?
+    @cars = @cars.where(:brand_id => params[:brand_id]) unless params[:brand_id].blank?
+    @cars = @cars.where(:classification => params[:classification]) unless params[:classification].blank?
+    @cars = @cars.where(:structure => params[:structure]) unless params[:structure].blank?
   end
 
   # GET /cars/1
